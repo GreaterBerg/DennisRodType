@@ -18,6 +18,9 @@ const textArea = document.querySelector(".maintext");
 const span = document.querySelectorAll(".char");
 let i = 0
 let counter = 0
+
+let wordCounter = 0
+
 textArea.addEventListener('keydown', (e) => {
     counter++
     if (counter === 1) {
@@ -32,6 +35,7 @@ textArea.addEventListener('keydown', (e) => {
             span[i-1].classList.remove("dash");
         }
         i++
+        wordCounter++
     } else if (e.key != "Backspace" && e.key != phrases[phraseIndex][i]) {
         span[i].classList.add("wrong","dash");
 
@@ -39,6 +43,7 @@ textArea.addEventListener('keydown', (e) => {
             span[i-1].classList.remove("dash");
         }
         i++
+        wordCounter++
     }
 
     if (i > 1 && e.key === "Backspace") {
@@ -53,7 +58,7 @@ textArea.addEventListener('keydown', (e) => {
 
 
 function timer(){
-    let sec = 59;
+    let sec = 30;
     let timer = setInterval(function(){
         if (sec > 9) {
             document.getElementById("time").innerHTML="00:"+sec;
@@ -64,7 +69,14 @@ function timer(){
         }
         if (sec < 0) {
             clearInterval(timer);
+            wpmValue.innerText = wpm()
             textArea.setAttribute("disabled","")
         }
     }, 1000);
+}
+
+
+let wpmValue = document.getElementById("wpm");
+let wpm  = () => {
+    return Math.floor(wordCounter / 2.5)
 }
