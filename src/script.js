@@ -6,13 +6,15 @@ let phraseIndex = (Math.floor(Math.random()*phrases.length));
 
 let textContainer = document.querySelector(".maintext__container");
 
+function phraseStart() {
+    phrases[phraseIndex].split("").forEach((char) => {
+        const spanChar = document.createElement("span");
+        spanChar.classList.add("char");
+        spanChar.innerText = char;
+        textContainer.appendChild(spanChar);
+    })}
 
-phrases[phraseIndex].split("").forEach((char) => {
-    const spanChar = document.createElement("span");
-    spanChar.classList.add("char");
-    spanChar.innerText = char;
-    textContainer.appendChild(spanChar);
-})
+phraseStart()
 
 const textArea = document.querySelector(".maintext");
 const span = document.querySelectorAll(".char");
@@ -62,7 +64,7 @@ textArea.addEventListener('keydown', (e) => {
 
 
 function timer(){
-    let sec = 5;
+    let sec = 30;
     let timer = setInterval(function(){
         if (sec > 9) {
             document.getElementById("time").innerHTML="00:"+sec;
@@ -73,18 +75,18 @@ function timer(){
         }
         if (sec < 0) {
             clearInterval(timer);
-            wpmValue.innerText = wpm()
-            accuracyValue.innerText = accuracy()
-            localStorage.setItem("wpm", wpm())
-            textArea.setAttribute("disabled","")
+            wpmValue.innerText = wpm();
+            accuracyValue.innerText = accuracy();
+            localStorage.setItem("wpm", wpm());
+            textArea.setAttribute("disabled","");
         }
     }, 1000);
 }
-let recordList = []
+let recordList = [];
 
 let wpmValue = document.getElementById("wpm");
 let wpm  = () => {
-    return Math.floor(wordCounter / 2.5)
+    return Math.floor(wordCounter / 2.5);
 }
 
 let accuracyValue = document.getElementById("accuracy");
@@ -92,6 +94,8 @@ let accuracy = () => {
     if (Math.floor(100 - ( (100 * wrongCounter) / correctCounter) ) > 0) {
     return Math.floor(100 - ( (100 * wrongCounter) / correctCounter) );
     } else {
-        return 0
+        return 0;
     }
 }
+
+let restartButton = document.getElementById("clearButton");
