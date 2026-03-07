@@ -119,5 +119,8 @@ nav {
   color: var(--red);
 }
 .dash {
-  border-right: 1px solid var(--neutral_0);
+  border-right: 2px solid var(--neutral_0);
+}
+.odash {
+  border-left: 2px solid var(--neutral_0);
 }

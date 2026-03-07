@@ -23,29 +23,38 @@ textArea.addEventListener('keydown', (e) => {
     if (counter === 1) {
         timer()
     }
-    if (e.key.length > 1) return;
+    if (e.key !== "Backspace" && e.key.length > 1) return;
 
-    if (e.key === phrases[phraseIndex][i]) {
-        span[i].classList.add("correct");
-        span[i].classList.add("dash");
+    if (e.key !== "Backspace" && e.key === phrases[phraseIndex][i]) {
+        span[i].classList.add("correct", "dash");
+
         if (i > 0) {
             span[i-1].classList.remove("dash");
         }
-    } else {
-        span[i].classList.add("wrong");
-        span[i].classList.add("dash");
+        i++
+    } else if (e.key != "Backspace" && e.key != phrases[phraseIndex][i]) {
+        span[i].classList.add("wrong","dash");
+
         if (i > 0) {
             span[i-1].classList.remove("dash");
         }
+        i++
     }
 
-    i++
+    if (i > 1 && e.key === "Backspace") {
+        span[i-1].classList.remove("wrong","correct","dash");
+        span[i-2].classList.add("dash");
+        i--
+    } else if (i <= 1 && e.key === "Backspace") {
+        span[i-1].classList.remove("wrong","correct","dash");
+        i--
+    }
 })
 
 
 function timer(){
-    var sec = 59;
-    var timer = setInterval(function(){
+    let sec = 59;
+    let timer = setInterval(function(){
         if (sec > 9) {
             document.getElementById("time").innerHTML="00:"+sec;
             sec--;
@@ -55,6 +64,7 @@ function timer(){
         }
         if (sec < 0) {
             clearInterval(timer);
+            textArea.setAttribute("disabled","")
         }
     }, 1000);
 }
