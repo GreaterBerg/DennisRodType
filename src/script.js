@@ -62,7 +62,7 @@ textArea.addEventListener('keydown', (e) => {
 
 
 function timer(){
-    let sec = 30;
+    let sec = 5;
     let timer = setInterval(function(){
         if (sec > 9) {
             document.getElementById("time").innerHTML="00:"+sec;
@@ -75,11 +75,12 @@ function timer(){
             clearInterval(timer);
             wpmValue.innerText = wpm()
             accuracyValue.innerText = accuracy()
+            localStorage.setItem("wpm", wpm())
             textArea.setAttribute("disabled","")
         }
     }, 1000);
 }
-
+let recordList = []
 
 let wpmValue = document.getElementById("wpm");
 let wpm  = () => {
@@ -88,5 +89,9 @@ let wpm  = () => {
 
 let accuracyValue = document.getElementById("accuracy");
 let accuracy = () => {
-    return Math.floor(100 - (( wrongCounter*100 ) / correctCounter));
+    if (Math.floor(100 - ( (100 * wrongCounter) / correctCounter) ) > 0) {
+    return Math.floor(100 - ( (100 * wrongCounter) / correctCounter) );
+    } else {
+        return 0
+    }
 }
