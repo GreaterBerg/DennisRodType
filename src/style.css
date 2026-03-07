@@ -6,7 +6,7 @@
 
   color-scheme: light dark;
   color: var(--neutral_400);
-  background-color: var(--neutral_900);
+  background-color: var(--neutral_800);
 
   --neutral_900: hsl(0, 0%, 7%);
   --neutral_800: hsl(0, 0%, 15%);
@@ -17,6 +17,9 @@
   --red: hsl(354, 63%, 57%);
   --green: hsl(140, 63%, 57%);
   --yellow: hsl(49, 85%, 70%);
+  
+  --bg-green: hsl(140, 17%, 35%);
+  --bg-red: hsl(354, 22%, 36%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -87,23 +90,34 @@ nav {
 
 /* main text section */
 .maintext__container {
-  width: 100%;
+  position: relative;
+  width: 80%;
+  max-height: 90vh;
   margin: 0;
   padding: 0;
 }
-
-.char {
-  font-size: 2rem;
-  font-weight: 500;
-}
-.correct {
-  color: var(--green);
-}
-.wrong {
-  color: var(--red);
-}
-
 .maintext {
   position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   opacity: 0;
+}
+
+
+/* char style section */
+.char {
+  font-size: 2.4rem;
+  font-weight: 200;
+}
+.correct {
+  color: var(--neutral_0);
+}
+.wrong {
+  text-decoration: underline;
+  color: var(--red);
+}
+.dash {
+  border-right: 1px solid var(--neutral_0);
 }
