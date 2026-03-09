@@ -72,6 +72,7 @@ nav {
 
 /* ## second nav container */
 .second__nav {
+  position: relative;
   margin: 0;
   padding: 0;
   display: flex;
@@ -159,6 +160,7 @@ nav {
 /* time settings */
 
 .time__settings {
+  position: absolute;
   display: flex;
   align-items: center;
 }
