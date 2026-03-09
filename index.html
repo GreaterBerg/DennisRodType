@@ -12,14 +12,23 @@
     
     <div class="navbar">
       <nav>
-        <div class="logo"><img src="public/rodmanmf.png" alt="logo" width="70rem"></div>
+        <div class="logo"><img class="logoImg" src="public/rodmanmf.png" alt="logo" width="70rem"></div>
         <div class="record value__container">Record:<p class="record__value value" id="wpm-record">0</p>WPM</div>
       </nav>
       
       <div class="second__nav">
         <div class="value__container">WPM:<p class="wpm__value value" id="wpm">0</p></div>
         <div class="value__container">Accuracy:<p class="accuracy__value value" id="accuracy">0</p>%</div>
-        <div class="value__container">Time:<p class="time__value value" id="time">00:30</Time:p></div>
+          
+        <div class="time__settings">
+          <div class="value__container">Time:<p class="time__value value" id="time">00:30</Time:p></div>
+              
+            <div class="timebtn__container">
+              <button class="time__button btn" id="timeButton30">30s</button>
+              <button class="time__button btn" id="timeButton60">60s</button>
+            </div>
+        </div>
+      
       </div>
     </div>
     <br>
@@ -27,7 +36,9 @@
       <textarea autofocus class="maintext"></textarea>
     </div>
     <div class="btn__container">
-      <button class="clear__button" id="clearButton">restart</button>
+
+      <button class="clear__button btn" id="clearButton">restart</button>
+      
     </div>
     <script type="module" src="/src/script.js"></script>
   </body>

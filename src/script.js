@@ -6,6 +6,7 @@ let phraseIndex = (Math.floor(Math.random()*phrases.length));
 
 let textContainer = document.querySelector(".maintext__container");
 
+// text generator
 function phraseStart() {
     phrases[phraseIndex].split("").forEach((char) => {
         const spanChar = document.createElement("span");
@@ -25,6 +26,8 @@ let wordCounter = 0;
 
 let correctCounter = 0;
 let wrongCounter = 0;
+
+// keyboard listener
 textArea.addEventListener('keydown', (e) => {
     counter++
     if (counter === 1) {
@@ -62,9 +65,17 @@ textArea.addEventListener('keydown', (e) => {
     }
 })
 
+// timer settings
+let sec = 30;
+
+// ======== values =========
+let wpmValueText = document.querySelector(".wpm__value");
+let accuracyValueText = document.querySelector(".accuracy__value");
+let timeValueText = document.querySelector(".time__value");
+// =========================
+
 
 function timer(){
-    let sec = 30;
     let timer = setInterval(function(){
         if (sec > 9) {
             document.getElementById("time").innerHTML="00:"+sec;
@@ -75,15 +86,38 @@ function timer(){
         }
         if (sec < 0) {
             clearInterval(timer);
+
             wpmValue.innerText = wpm();
             accuracyValue.innerText = accuracy();
+
+            wpmValueText.style.color = "var(--neutral_0)";
+            accuracyValueText.style.color = "var(--neutral_0)";
+            timeValueText.style.color = "var(--neutral_0)";
+
+
             localStorage.setItem("wpm", wpm());
             textArea.setAttribute("disabled","");
         }
     }, 1000);
 }
-let recordList = [];
 
+let timerBtn30 = document.getElementById("timeButton30");
+let timerBtn60 = document.getElementById("timeButton60");
+
+let timeValue = document.getElementById("time");
+
+timerBtn30.addEventListener("click", () => {
+    sec = 30;
+    timeValue.innerText = "00:30";
+})
+
+timerBtn60.addEventListener("click", () => {
+    sec = 59;
+    timeValue.innerText = "01:00";
+})
+
+
+// wpm & accuracy algorithms
 let wpmValue = document.getElementById("wpm");
 let wpm  = () => {
     return Math.floor(wordCounter / 2.5);
